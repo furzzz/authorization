@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: MySQL-8.2
--- Время создания: Фев 01 2025 г., 07:07
+-- Время создания: Фев 06 2025 г., 00:07
 -- Версия сервера: 8.2.0
 -- Версия PHP: 8.3.6
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- База данных: `authorization`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` int NOT NULL,
+  `created_task_user_id` int NOT NULL,
+  `send_task_user_id` int NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  `status` tinyint(1) NOT NULL,
+  `created_data` date NOT NULL,
+  `end_data` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `created_task_user_id`, `send_task_user_id`, `title`, `description`, `status`, `created_data`, `end_data`) VALUES
+(1, 7, 8, 'йцусывавыам', 'ывапавпапввапапввапывапыавпы', 0, '2025-02-05', '2025-02-19');
 
 -- --------------------------------------------------------
 
@@ -41,11 +65,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `avatar`, `password`) VALUES
 (7, 'furzik', 'tom666336@gmail.com', 'uploads/avatar_1738358397.jpg', '$2y$10$mkCwxgZxmhD8N/SXKkkc0Oy89gWBQ8crhDSpwwawL8IXeIi.QNK7u'),
-(8, 'test', 'test@gmail.com', 'uploads/avatar_1738364792.jpg', '$2y$10$XsQECHI9WhROZhdaKkuQoOX2ZcveVziL8NnYTbImSNXtqb56xuMti');
+(8, 'test', 'test@gmail.com', 'uploads/avatar_1738364792.jpg', '$2y$10$XsQECHI9WhROZhdaKkuQoOX2ZcveVziL8NnYTbImSNXtqb56xuMti'),
+(10, 'QWERTY', 'qwerty@QWE.OP', 'uploads/avatar_1738365545.jpg', '$2y$10$6dNH/ChEUlnCMEIDKkfGYOApdhxZmxK/LvyuWJLsAhyGKiNtUVpvW');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `users`
@@ -59,10 +90,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
