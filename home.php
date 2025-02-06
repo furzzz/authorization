@@ -13,7 +13,6 @@ $user = currentUser();
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
-
 <div class="card home">
     <img
             class="avatar"
@@ -24,6 +23,7 @@ $user = currentUser();
     <form action="src/actions/logout.php" method="post">
         <button href="#" role="button">Выйти из аккаунта</button>
     </form>
+
     <a href="createTask.php"><button role="button">Создать задачу</button></a>
     <a href="#"><button role="button">Задачи которые вы дали</button></a>
     <h1>Текущие задачи</h1>
@@ -33,7 +33,6 @@ $user = currentUser();
             <option value="">Выполнено</option>
             <option value="today">Не выполнено</option>
         </select>
-    </div>
     <ul id="task-list">
         <!-- Задачи будут -->
     </ul>
