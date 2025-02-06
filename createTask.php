@@ -25,6 +25,7 @@ $user = currentUser();
     <?php echo inputElement('title', 'title', 'text', ['placeholder' => 'Имя задачи']) ?>
     <?php echo inputElement('description', 'Описание задачи', 'text', ['placeholder' => 'Описание задачи']) ?>
     <?php echo inputElement('email', 'Кому будет отправлена задача', 'text', ['placeholder' => 'Почта получателя']) ?>
+    <?php echo inputElement('data', 'Дата оконччания задания', 'date') ?>
     <button
         type="submit"
         id="submit"
