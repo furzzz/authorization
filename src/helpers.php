@@ -106,11 +106,32 @@ function logout() : void
     unset($_SESSION['user']);
     redirect('/');
 }
-function checkAuth() : void
+function checkAuth(string $path) : void
 {
-    if(!isset($_SESSION['user']['id'])) redirect('/');
+    if(!isset($_SESSION['user']['id'])) redirect($path);
 }
 function checkGuest() : void
 {
     if(isset($_SESSION['user']['id'])) redirect('/home.php');
+}
+
+function inputElement($name, $label, $type = 'text', $options = [])
+{
+    $block = '<label for="' . htmlspecialchars($name) . '">
+        ' . $label . '
+        <input
+            type="' . htmlspecialchars($type) . '"
+            id="' . htmlspecialchars($name) . '"
+            name="' . htmlspecialchars($name) . '"
+            placeholder="' . htmlspecialchars($options['placeholder'] ?? "") . '"
+            value="' . htmlspecialchars(returnOldValues($name)) . '"
+            required
+            ' . validationErrorAttr($name) . ' />';
+
+    if (hasValidationError($name)) {
+        $block .= '<small>' . validationErrorMassage($name) . '</small>';
+    }
+
+    $block .= '</label>';
+    return $block;
 }

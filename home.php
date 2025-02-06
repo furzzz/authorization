@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/src/helpers.php';
-checkAuth();
+checkAuth('/');
 $user = currentUser();
 ?>
 
@@ -24,10 +24,11 @@ $user = currentUser();
     <form action="src/actions/logout.php" method="post">
         <button href="#" role="button">Выйти из аккаунта</button>
     </form>
-    <button href="#" role="button">Создать задачу</button>
+    <a href="createTask.php"><button role="button">Создать задачу</button></a>
+    <a href="#"><button role="button">Задачи которые вы дали</button></a>
     <h1>Текущие задачи</h1>
     <div class="filters">
-        <label for="date-filter">Фильтровать по дате создания:</label>
+        <label for="date-filter">Фильтровать по статусу:</label>
         <select id="date-filter" onchange="filterTasks(this.value)">
             <option value="">Выполнено</option>
             <option value="today">Не выполнено</option>

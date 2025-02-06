@@ -15,77 +15,16 @@ checkGuest();
 
 <form class="card" action="src/actions/register.php" method="post" enctype="multipart/form-data">
     <h2>Регистрация</h2>
+    <?php echo inputElement('name', 'Имя', 'text', ['placeholder' => 'Иван Иванов']) ?>
 
-    <label for="name">
-        Имя
-        <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Иванов Иван"
-            value="<?php echo returnOldValues('name')?>"
-            required
-            <?php echo validationErrorAttr('name');?>
-        >
-        <?php if(hasValidationError('name')): ?>
-            <small><?php echo validationErrorMassage('name');?></small>
-        <?php endif; ?>
-    </label>
 
-    <label for="email">
-        E-mail
-        <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="furzik@furz.ru"
-            value="<?php echo returnOldValues('email')?>"
-            required
-            <?php echo validationErrorAttr('email');?>
-        >
-        <?php if(hasValidationError('email')): ?>
-            <small><?php echo validationErrorMassage('email');?></small>
-        <?php endif; ?>
-    </label>
+    <?php echo inputElement('email', 'E-mail', 'text', ['placeholder' => 'furzik@furz.ru']) ?>
+    <?php echo inputElement('avatar', 'Изображение профиля', 'file') ?>
 
-    <label for="avatar">Изображение профиля
-        <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            <?php echo validationErrorAttr('avatar');?>
-        >
-        <?php if(hasValidationError('avatar')): ?>
-            <small><?php echo validationErrorMassage('avatar');?></small>
-        <?php endif; ?>
-    </label>
 
     <div class="grid">
-        <label for="password">
-            Пароль
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="******"
-                required
-                <?php echo validationErrorAttr('password');?>
-            >
-            <?php if(hasValidationError('password')): ?>
-                <small><?php echo validationErrorMassage('password');?></small>
-            <?php endif; ?>
-        </label>
-
-        <label for="password_confirmation">
-            Подтверждение
-            <input
-                type="password"
-                id="password_confirmation"
-                name="password_confirmation"
-                placeholder="******"
-                required
-            >
-        </label>
+        <?php echo inputElement('password', 'Пароль', 'password', ['placeholder' => '********']) ?>
+        <?php echo inputElement('password_confirmation', 'Подтверждение', 'password', ['placeholder' => '********']) ?>
     </div>
 
     <fieldset>
