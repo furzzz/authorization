@@ -135,3 +135,25 @@ function inputElement($name, $label, $type = 'text', $options = [])
     $block .= '</label>';
     return $block;
 }
+
+function inputTasksCurrentUser() : array
+{
+    $pdo = getPDO();
+    if(!isset($_SESSION['user'])) return false;
+    $userID = $_SESSION['user']['id'] ?? null;
+
+    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `send_task_user_id` = :id;');
+    $stmt->execute(['id' => $userID]);
+    $tasks = $stmt->fetchAll();
+    return $tasks;
+}
+
+function inputTasksTitleCurrentUser()
+{
+    $tasks = inputTasksCurrentUser();
+    foreach($tasks as $task){
+        foreach ($task as $key => $value){
+            if($key === 'title') echo '<li> <a href="#" style="padding: 0; margin: 0;"><button role="button">' . $value . '</button></a> </li>';
+        }
+    }
+}

@@ -19,23 +19,29 @@ $user = currentUser();
             src="<?php echo $user['avatar']?>"
             alt="<?php echo $user['name']?>"
     >
-    <h1>Привет, <?php echo $user['name']?>!</h1>
-    <form action="src/actions/logout.php" method="post">
-        <button role="button">Выйти из аккаунта</button>
+    <h2 style="padding: 0; margin: 0;">Привет, <?php echo $user['name']?>!</h2>
+    <form action="src/actions/logout.php" method="post" style="padding: 0; margin: 0; ">
+        <button role="button" style="padding: 10px; margin: 0;">Выйти из аккаунта</button>
     </form>
 
-    <a href="createTask.php"><button role="button">Создать задачу</button></a>
-    <a href="#"><button role="button">Задачи которые вы дали</button></a>
-    <h1>Текущие задачи</h1>
+    <div class="buttons">
+        <a href="createTask.php" style="padding: 0; margin: 0;"><button role="button">Создать задачу</button></a>
+        <a href="#" style="padding: 0; margin: 0;"><button role="button">Задачи которые вы дали</button></a>
+    </div>
+
     <div class="filters">
+        <h2 style="padding: 0; margin: 0;">Текущие задачи</h2>
         <label for="date-filter">Фильтровать по статусу:</label>
         <select id="date-filter">
             <option value="">Выполнено</option>
             <option value="today">Не выполнено</option>
         </select>
-    <ul id="task-list">
-        <!-- Задачи будут -->
-    </ul>
+
+        <form action="#" method="post" style="padding: 0; margin: 0; ">
+            <ul id="task-list">
+                <?php inputTasksTitleCurrentUser();?>
+            </ul>
+        </form>
 </div>
 
 <script src="assets/app.js"></script>

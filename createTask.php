@@ -14,7 +14,7 @@ $user = currentUser();
 </head>
 <body>
 
-<form class="card" action="src/actions/login.php" method="post">
+<form class="card" action="src/actions/createtask.php" method="post">
     <h2>Создание задачи</h2>
 
     <?php if(hasMessage('error')):?>
@@ -22,10 +22,10 @@ $user = currentUser();
             <?php echo getMessage('error');?>
         </div>
     <?php endif; ?>
-    <?php echo inputElement('title', 'title', 'text', ['placeholder' => 'Имя задачи']) ?>
+    <?php echo inputElement('title', 'Имя задачи', 'text', ['placeholder' => 'Имя задачи']) ?>
     <?php echo inputElement('description', 'Описание задачи', 'text', ['placeholder' => 'Описание задачи']) ?>
-    <?php echo inputElement('email', 'Кому будет отправлена задача', 'text', ['placeholder' => 'Почта получателя']) ?>
-    <?php echo inputElement('data', 'Дата оконччания задания', 'date') ?>
+    <?php echo inputElement('emailSend', 'Кому будет отправлена задача', 'text', ['placeholder' => 'Почта получателя']) ?>
+    <?php echo inputElement('date', 'Дата оконччания задания', 'date') ?>
     <button
         type="submit"
         id="submit"
