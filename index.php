@@ -30,7 +30,5 @@ checkGuest();
 </form>
 
 <p>У меня еще нет <a href="/register.php">аккаунта</a></p>
-
-<script src="assets/app.js"></script>
 </body>
 </html>

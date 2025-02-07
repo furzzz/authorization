@@ -21,7 +21,7 @@ $user = currentUser();
     >
     <h1>Привет, <?php echo $user['name']?>!</h1>
     <form action="src/actions/logout.php" method="post">
-        <button href="#" role="button">Выйти из аккаунта</button>
+        <button role="button">Выйти из аккаунта</button>
     </form>
 
     <a href="createTask.php"><button role="button">Создать задачу</button></a>
@@ -29,7 +29,7 @@ $user = currentUser();
     <h1>Текущие задачи</h1>
     <div class="filters">
         <label for="date-filter">Фильтровать по статусу:</label>
-        <select id="date-filter" onchange="filterTasks(this.value)">
+        <select id="date-filter">
             <option value="">Выполнено</option>
             <option value="today">Не выполнено</option>
         </select>
