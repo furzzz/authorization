@@ -41,6 +41,7 @@ function returnOldValues(string $key)
     return $value;
 }
 
+
 function uploadFile(array $file, string $prefix) : string
 {
     $uploadPath = __DIR__ . '../../uploads';
@@ -115,7 +116,7 @@ function checkGuest() : void
     if(isset($_SESSION['user']['id'])) redirect('/home.php');
 }
 
-function inputElement($name, $label, $type = 'text', $options = [])
+function inputElement(string $name, string $label, string $type = 'text', array $options = [], bool $required = true, bool $disabled = false)
 {
     $block = '<label for="' . htmlspecialchars($name) . '">
         ' . $label . '
@@ -124,9 +125,10 @@ function inputElement($name, $label, $type = 'text', $options = [])
             id="' . htmlspecialchars($name) . '"
             name="' . htmlspecialchars($name) . '"
             placeholder="' . htmlspecialchars($options['placeholder'] ?? "") . '"
-            value="' . htmlspecialchars(returnOldValues($name)) . '"
-            required
-            ' . validationErrorAttr($name) . ' />';
+            value="' . htmlspecialchars($options['value']?? returnOldValues($name)) . '"';
+    if($required) $block .= 'required';
+    if($disabled) $block .= 'disabled';
+    $block .= validationErrorAttr($name) . ' />';
 
     if (hasValidationError($name)) {
         $block .= '<small>' . validationErrorMassage($name) . '</small>';
@@ -136,24 +138,45 @@ function inputElement($name, $label, $type = 'text', $options = [])
     return $block;
 }
 
-function inputTasksCurrentUser() : array
+function inputTasksCurrentUser(string $status, string $table, $valueId) : array
 {
-    $pdo = getPDO();
     if(!isset($_SESSION['user'])) return false;
-    $userID = $_SESSION['user']['id'] ?? null;
 
-    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `send_task_user_id` = :id;');
-    $stmt->execute(['id' => $userID]);
-    $tasks = $stmt->fetchAll();
-    return $tasks;
+    $pdo = getPDO();
+
+    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `' . $table . '` = :id ORDER BY `status` ' . $status . ';');
+    $stmt->execute(['id' => $valueId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function inputTasksTitleCurrentUser()
+function inputTasksTitleCurrentUser(string $status, string $table, $id)
 {
-    $tasks = inputTasksCurrentUser();
+    $list = '';
+    $tasks = inputTasksCurrentUser($status, $table, $id);
     foreach($tasks as $task){
         foreach ($task as $key => $value){
-            if($key === 'title') echo '<li> <a href="#" style="padding: 0; margin: 0;"><button role="button">' . $value . '</button></a> </li>';
+            if($key === 'id') $taskID = $value;
+            if($key === 'title') $list.= '<button role="button" name="taskID" value= "' . $taskID. '" style="
+                padding: 10px; 
+                margin: 5px; 
+                height: 50px; 
+                width: 750px;
+                " >'. $value;
+            if($key === 'status') $list .= $value?' : Выполнено':' : Не выполнено' . '</button>';
         }
     }
+    echo $list;
+}
+
+function inputTasksIdTask(mixed $id)
+{
+    if(!isset($_SESSION['user'])) return false;
+
+    $pdo = getPDO();
+
+    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `id` = :id ;');
+    $stmt->execute(['id' => $id]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }

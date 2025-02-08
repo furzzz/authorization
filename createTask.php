@@ -13,24 +13,25 @@ $user = currentUser();
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
+<div class="card">
+    <form action="src/actions/createtask.php" method="post" style="margin: 0">
+        <h2>Создание задачи</h2>
 
-<form class="card" action="src/actions/createtask.php" method="post">
-    <h2>Создание задачи</h2>
-
-    <?php if(hasMessage('error')):?>
-        <div class="notice error">
-            <?php echo getMessage('error');?>
-        </div>
-    <?php endif; ?>
-    <?php echo inputElement('title', 'Имя задачи', 'text', ['placeholder' => 'Имя задачи']) ?>
-    <?php echo inputElement('description', 'Описание задачи', 'text', ['placeholder' => 'Описание задачи']) ?>
-    <?php echo inputElement('emailSend', 'Кому будет отправлена задача', 'text', ['placeholder' => 'Почта получателя']) ?>
-    <?php echo inputElement('date', 'Дата оконччания задания', 'date') ?>
-    <button
-        type="submit"
-        id="submit"
-    >Продолжить</button>
-</form>
-<a href="home.php"><button role="button">Вернуться на главную страницу</button></a>
+        <?php if(hasMessage('error')):?>
+            <div class="notice error">
+                <?php echo getMessage('error');?>
+            </div>
+        <?php endif; ?>
+        <?php echo inputElement('title', 'Имя задачи', 'text', ['placeholder' => 'Имя задачи']) ?>
+        <?php echo inputElement('description', 'Описание задачи', 'text', ['placeholder' => 'Описание задачи']) ?>
+        <?php echo inputElement('emailSend', 'Кому будет отправлена задача', 'text', ['placeholder' => 'Почта получателя']) ?>
+        <?php echo inputElement('date', 'Дата оконччания задания', 'date') ?>
+        <button
+                type="submit"
+                id="submit"
+        >Продолжить</button>
+    </form>
+    <a href="home.php"><button role="button" style="margin: 0">Вернуться на главную страницу</button></a>
+</div>
 </body>
 </html>

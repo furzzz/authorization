@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="277caad7-b34b-4b84-947e-2f03d24d3624" name="Changes" comment="" />
+    <list default="true" id="3a16a705-b4c2-41b7-b857-02c6ffecc231" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/actions/deletetask.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/statustrue.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/uploadtask.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/taskInfo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploadTask.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/youTask.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/authorization.ru.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.osp/project.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.osp/project.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/createTask.php" beforeDir="false" afterPath="$PROJECT_DIR$/createTask.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/createtask.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/createtask.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,9 +53,9 @@
     </include_path>
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
+  "associatedIndex": 4
 }]]></component>
-  <component name="ProjectId" id="2si3YY1Sufaog2gXrswzV0PvG0g" />
+  <component name="ProjectId" id="2sl4TJktkBkTLt4ap4QkuDJBUVY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,7 +64,6 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/OSPanel/home/authorization.local",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,12 +83,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="277caad7-b34b-4b84-947e-2f03d24d3624" name="Changes" comment="" />
-      <created>1738924615895</created>
+      <changelist id="3a16a705-b4c2-41b7-b857-02c6ffecc231" name="Changes" comment="" />
+      <created>1739016834107</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1738924615895</updated>
-      <workItem from="1738924616916" duration="9933000" />
+      <updated>1739016834107</updated>
+      <workItem from="1739016835143" duration="22807000" />
     </task>
     <servers />
   </component>

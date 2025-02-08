@@ -1,26 +1,15 @@
 <?php
 require_once __DIR__.'/../helpers.php';
 
+$id = $_SESSION['taskID'] ?? null;
 $title = $_POST['title'] ?? null;
 $description = $_POST['description'] ?? null;
-$emailSend = $_POST['emailSend'] ?? null;
 $date = $_POST['date'] ?? null;
 $dateParse = date_parse($date);
 $currentDateTime = new DateTime('now');
 $currentDate = $currentDateTime->format('Y-m-d');
-
-if (empty($emailSend) || !filter_var($emailSend, FILTER_VALIDATE_EMAIL)) {
-    setValidationError('email', 'Неверный формат электронной почты');
-    setMessage('error', 'Ошибка валидации');
-    setOldValue('email', $emailSend);
-    redirect('/createTask.php');
-}
-$userSend = findUser($emailSend);
-if (!$userSend) {
-    setMessage('error', "Пользователь $emailSend не найден");
-    setOldValue('email', $emailSend);
-    redirect('/createTask.php');
-}
+$status = $_POST['status']?'1': '0';
+echo $status;
 if(empty($title)) {
     setMessage('error', "Ошибка");
     setValidationError('title', 'Пустое поле имя');
@@ -45,24 +34,21 @@ if(!checkdate($dateParse['month'], $dateParse['day'], $dateParse['year']) || $da
 
 $pdo = getPDO();
 
-$query = 'INSERT INTO `tasks` (`created_task_user_id`, `send_task_user_id`, `title`, `description`, `status`, `created_data`, `end_data`) 
-VALUES (:createdTaskUserId, :sendTaskUserId, :title, :description, :status, :createdDate, :endDate)';
+$query = "UPDATE `tasks` SET `title`= :title ,`description`= :description ,`status`= :status , `end_data` = :endDate WHERE `id` = :id";
 $params = [
-    'createdTaskUserId' => $_SESSION['user']['id'],
-    'sendTaskUserId' => $userSend['id'],
+    'id' => $id,
     'title' => $title,
     'description' => $description,
-    'status' => 0,
-    'createdDate' => $currentDate,
+    'status' => $status,
     'endDate' => $date
 ];
 $stmt = $pdo->prepare($query);
 try{
     $stmt->execute($params);
 }catch (\Exception $e){
-    die("Connection error; {$e->getMessage()}");
+    die("Connection error; {$e->getMessage()} $id");
 }
 
 $_SESSION['taskID'] = [];
-redirect('/createTask.php');
+redirect('/youTask.php');
 ?>
