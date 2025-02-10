@@ -33,10 +33,12 @@ $task = inputCreatedTasksIdTask($_GET['taskID']);
             value="<?php echo $_GET['taskID']?>"
         >Применить</button>
     </form>
-    <form action="src/actions/deletetask.php">
+    <form action="src/actions/deleteTaskCreator.php" method="get">
         <button
             type="submit"
             id="submit"
+            name="taskID"
+            value="<?php echo $_GET['taskID']?>"
             style="background-color: #762c2c"
         >Удалить задачу</button>
     </form>

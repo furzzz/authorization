@@ -46,7 +46,7 @@ $task = inputSendTasksIdTask($_GET['taskID']);
     <?php endif; ?>
 
     <?php if($task['status'] == '1'): ?>
-        <form action="src/actions/deletetask.php" method="get" style="padding: 0; margin: 5px; display: flex; flex-direction: column;">
+        <form action="src/actions/deleteTaskSender.php" method="get" style="padding: 0; margin: 5px; display: flex; flex-direction: column;">
             <button name="taskID" value="<?php echo $_GET['taskID'];?>" style="padding: 5px; margin: 5px; width: auto; background-color: #762c2c"
                     type="submit"
                     id="submit"
