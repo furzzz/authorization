@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/../helpers.php';
 
-$id = $_SESSION['taskID'] ?? null;
+$id = $_POST['taskID'] ?? null;
 $title = $_POST['title'] ?? null;
 $description = $_POST['description'] ?? null;
 $date = $_POST['date'] ?? null;
@@ -9,7 +9,13 @@ $dateParse = date_parse($date);
 $currentDateTime = new DateTime('now');
 $currentDate = $currentDateTime->format('Y-m-d');
 $status = $_POST['status']?'1': '0';
-echo $status;
+
+$result = inputCreatedTasksIdTask($_POST['taskID']);
+if ($result['created_task_user_id'] != $_SESSION['user']['id']) {
+    http_response_code(403);
+    die('Forbidden');
+}
+
 if(empty($title)) {
     setMessage('error', "Ошибка");
     setValidationError('title', 'Пустое поле имя');

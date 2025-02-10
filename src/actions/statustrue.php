@@ -1,15 +1,19 @@
 <?php
 require_once __DIR__.'/../helpers.php';
 
-$id = $_SESSION['taskID'] ?? null;
-$status = $_POST['status']?'1': '0';
+$id = $_GET['taskID'] ?? null;
+$result = inputSendTasksIdTask($_GET['taskID']);
+if ($result['send_task_user_id'] != $_SESSION['user']['id']) {
+    http_response_code(403);
+    die('Forbidden');
+}
 
 $pdo = getPDO();
 
 $query = "UPDATE `tasks` SET `status`= :status WHERE `id` = :id";
 $params = [
     'id' => $id,
-    'status' => $status
+    'status' => 1
 ];
 $stmt = $pdo->prepare($query);
 try{

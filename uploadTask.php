@@ -2,8 +2,7 @@
 require_once __DIR__ . '/src/helpers.php';
 checkAuth('/');
 $user = currentUser();
-$task = inputTasksIdTask($_POST['taskID']);
-$_SESSION['taskID'] = $_POST['taskID'];
+$task = inputCreatedTasksIdTask($_GET['taskID']);
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +29,8 @@ $_SESSION['taskID'] = $_POST['taskID'];
         <button
             type="submit"
             id="submit"
+            name="taskID"
+            value="<?php echo $_GET['taskID']?>"
         >Применить</button>
     </form>
     <form action="src/actions/deletetask.php">

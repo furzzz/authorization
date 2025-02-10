@@ -146,14 +146,30 @@ function inputTasksCurrentUser(string $status, string $table, $valueId) : array
 
     $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `' . $table . '` = :id ORDER BY `status` ' . $status . ';');
     $stmt->execute(['id' => $valueId]);
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if($table === 'send_task_user_id'){
+        foreach ($result as $task){
+            if ($task['send_task_user_id'] != $_SESSION['user']['id']) {
+                http_response_code(403);
+                die('Forbidden');
+            }
+        }
+    } elseif ($table === 'created_task_user_id'){
+        foreach ($result as $task){
+            if ($task['created_task_user_id'] != $_SESSION['user']['id']) {
+                http_response_code(403);
+                die('Forbidden');
+            }
+        }
+    }
+    return $result;
 }
 
-function inputTasksTitleCurrentUser(string $status, string $table, $id)
+function inputTasksTitleCurrentUser(string $status, string $table)
 {
+
     $list = '';
-    $tasks = inputTasksCurrentUser($status, $table, $id);
+    $tasks = inputTasksCurrentUser($status, $table, $_SESSION['user']['id'] ?? null);
     foreach($tasks as $task){
         foreach ($task as $key => $value){
             if($key === 'id') $taskID = $value;
@@ -169,14 +185,37 @@ function inputTasksTitleCurrentUser(string $status, string $table, $id)
     echo $list;
 }
 
-function inputTasksIdTask(mixed $id)
+function inputSendTasksIdTask(mixed $id)
 {
-    if(!isset($_SESSION['user'])) return false;
+    if (!isset($_SESSION['user'])) return false;
 
     $pdo = getPDO();
 
     $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `id` = :id ;');
     $stmt->execute(['id' => $id]);
 
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $result =  $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result['send_task_user_id'] != $_SESSION['user']['id']) {
+        http_response_code(403);
+        die('Forbidden');
+    }
+    return $result;
+}
+function inputCreatedTasksIdTask(mixed $id)
+{
+    if (!isset($_SESSION['user'])) return false;
+
+    $pdo = getPDO();
+
+    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `id` = :id ;');
+    $stmt->execute(['id' => $id]);
+
+    $result =  $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result['created_task_user_id'] != $_SESSION['user']['id']) {
+        http_response_code(403);
+        die('Forbidden');
+    }
+    return $result;
 }
