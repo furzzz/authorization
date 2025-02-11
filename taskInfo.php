@@ -2,7 +2,7 @@
 require_once __DIR__ . '/src/helpers.php';
 checkAuth('/');
 $user = currentUser();
-$task = inputSendTasksIdTask($_GET['taskID']);
+$task = inputTasksIdTask($_GET['taskID']);
 
 ?>
 
@@ -42,15 +42,6 @@ $task = inputSendTasksIdTask($_GET['taskID']);
                     type="submit"
                     id="submit"
             >Выполнено</button>
-        </form>
-    <?php endif; ?>
-
-    <?php if($task['status'] == '1'): ?>
-        <form action="src/actions/deleteTaskSender.php" method="get" style="padding: 0; margin: 5px; display: flex; flex-direction: column;">
-            <button name="taskID" value="<?php echo $_GET['taskID'];?>" style="padding: 5px; margin: 5px; width: auto; background-color: #762c2c"
-                    type="submit"
-                    id="submit"
-            >Удалить задачу</button>
         </form>
     <?php endif; ?>
     <a href="home.php"><button role="button">Вернуться на главную страницу</button></a>

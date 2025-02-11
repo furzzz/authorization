@@ -9,6 +9,11 @@ $dateParse = date_parse($date);
 $currentDateTime = new DateTime('now');
 $currentDate = $currentDateTime->format('Y-m-d');
 
+setOldValue('emailSend', $emailSend);
+setOldValue('title', $title);
+setOldValue('description', $description);
+setOldValue('date', $date);
+
 if (empty($emailSend) || !filter_var($emailSend, FILTER_VALIDATE_EMAIL)) {
     setValidationError('email', 'Неверный формат электронной почты');
     setMessage('error', 'Ошибка валидации');
@@ -37,7 +42,7 @@ if(empty($date)) {
     setValidationError('date', 'Пустое поле даты окончания задания');
     redirect('/createTask.php');
 }
-if(!checkdate($dateParse['month'], $dateParse['day'], $dateParse['year']) || $date <= $currentDate) {
+if(!checkdate($dateParse['month'], $dateParse['day'], $dateParse['year']) || $date <= $currentDate || $dateParse['year'] > (date_parse($currentDate)['year'] + 5)) {
     setMessage('error', "Ошибка");
     setValidationError('date', 'Поле даты указано неверно');
     redirect('/createTask.php');
@@ -59,10 +64,13 @@ $params = [
 $stmt = $pdo->prepare($query);
 try{
     $stmt->execute($params);
+    resetOldValue('emailSend');
+    resetOldValue('title');
+    resetOldValue('description');
+    resetOldValue('date');
 }catch (\Exception $e){
     die("Connection error; {$e->getMessage()}");
 }
 
-$_SESSION['taskID'] = [];
-redirect('/createTask.php');
+redirect('/');
 ?>

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/src/helpers.php';
 checkAuth('/');
 $user = currentUser();
-$task = inputCreatedTasksIdTask($_GET['taskID']);
+$task = inputTasksIdTask($_GET['taskID']);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ $task = inputCreatedTasksIdTask($_GET['taskID']);
             value="<?php echo $_GET['taskID']?>"
         >Применить</button>
     </form>
-    <form action="src/actions/deleteTaskCreator.php" method="get">
+    <form action="src/actions/deleteTask.php" method="get">
         <button
             type="submit"
             id="submit"

@@ -13,8 +13,8 @@ $user = currentUser();
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
-<div class="card">
-    <form action="src/actions/createtask.php" method="post" style="margin: 0">
+<div class="card" >
+    <form class="card" action="src/actions/createtask.php" method="post"style="margin: 10px;" >
         <h2>Создание задачи</h2>
 
         <?php if(hasMessage('error')):?>

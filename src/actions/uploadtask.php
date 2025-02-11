@@ -10,7 +10,7 @@ $currentDateTime = new DateTime('now');
 $currentDate = $currentDateTime->format('Y-m-d');
 $status = $_POST['status']?'1': '0';
 
-$result = inputCreatedTasksIdTask($_POST['taskID']);
+$result = inputTasksIdTask($_POST['taskID']);
 if ($result['created_task_user_id'] != $_SESSION['user']['id']) {
     http_response_code(403);
     die('Forbidden');

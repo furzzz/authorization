@@ -34,13 +34,17 @@ function setOldValue(string $key, mixed $value) : void
     $_SESSION['old'][$key] = $value;
 }
 
-function returnOldValues(string $key)
+function returnOldValue(string $key)
 {
     $value = $_SESSION['old'][$key] ?? '';
     unset($_SESSION['old'][$key]);
     return $value;
 }
 
+function resetOldValue(string $key)
+{
+    unset($_SESSION['old'][$key]);
+}
 
 function uploadFile(array $file, string $prefix) : string
 {
@@ -121,11 +125,12 @@ function inputElement(string $name, string $label, string $type = 'text', array 
     $block = '<label for="' . htmlspecialchars($name) . '">
         ' . $label . '
         <input
+            style="margin: 5px;"
             type="' . htmlspecialchars($type) . '"
             id="' . htmlspecialchars($name) . '"
             name="' . htmlspecialchars($name) . '"
             placeholder="' . htmlspecialchars($options['placeholder'] ?? "") . '"
-            value="' . htmlspecialchars($options['value']?? returnOldValues($name)) . '"';
+            value="' . htmlspecialchars($options['value']?? returnOldValue($name)) . '"';
     if($required) $block .= 'required';
     if($disabled) $block .= 'disabled';
     $block .= validationErrorAttr($name) . ' />';
@@ -147,21 +152,13 @@ function inputTasksCurrentUser(string $status, string $table, $valueId) : array
     $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `' . $table . '` = :id ORDER BY `status` ' . $status . ';');
     $stmt->execute(['id' => $valueId]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if($table === 'send_task_user_id'){
+
         foreach ($result as $task){
-            if ($task['send_task_user_id'] != $_SESSION['user']['id']) {
+            if ($task['send_task_user_id'] != $_SESSION['user']['id'] && $task['created_task_user_id'] != $_SESSION['user']['id']) {
                 http_response_code(403);
                 die('Forbidden');
             }
         }
-    } elseif ($table === 'created_task_user_id'){
-        foreach ($result as $task){
-            if ($task['created_task_user_id'] != $_SESSION['user']['id']) {
-                http_response_code(403);
-                die('Forbidden');
-            }
-        }
-    }
     return $result;
 }
 
@@ -185,7 +182,7 @@ function inputTasksTitleCurrentUser(string $status, string $table)
     echo $list;
 }
 
-function inputSendTasksIdTask(mixed $id)
+function inputTasksIdTask(mixed $id)
 {
     if (!isset($_SESSION['user'])) return false;
 
@@ -195,27 +192,10 @@ function inputSendTasksIdTask(mixed $id)
     $stmt->execute(['id' => $id]);
 
     $result =  $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($result['send_task_user_id'] != $_SESSION['user']['id']) {
+    if ($result['send_task_user_id'] != $_SESSION['user']['id'] && $result['created_task_user_id'] != $_SESSION['user']['id']) {
         http_response_code(403);
         die('Forbidden');
     }
-    return $result;
-}
-function inputCreatedTasksIdTask(mixed $id)
-{
-    if (!isset($_SESSION['user'])) return false;
 
-    $pdo = getPDO();
-
-    $stmt = $pdo->prepare('SELECT * FROM `tasks` WHERE `id` = :id ;');
-    $stmt->execute(['id' => $id]);
-
-    $result =  $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($result['created_task_user_id'] != $_SESSION['user']['id']) {
-        http_response_code(403);
-        die('Forbidden');
-    }
     return $result;
 }

@@ -30,7 +30,7 @@ $status = $_GET['status'] ?? 'DESC';
                 <a href="youTask.php" style="margin: 5px"><button role="button" style="padding: 15px; border: 5px;">Задачи которые вы дали</button></a>
             </div>
         <h2 style="padding: 0; margin: 0;">Текущие задачи</h2>
-        <form action="home.php" method="get" style='display: flex; flex-direction: row; align-items: center; padding: 0; margin: 0;'>
+        <form class="card" action="home.php" method="get" style='display: flex; flex-direction: row; align-items: center; padding: 10px; margin: 0;'>
             <label for="date-filter" style="font-size: 15px">Фильтровать по статусу:</label>
             <select id="date-filter" name="status" style="padding: 0; margin: 5px; ; width: 125px;font-size: 15px; background-position: right">
                 <option value="DESC">Выполнено</option>

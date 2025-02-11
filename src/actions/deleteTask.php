@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__.'/../helpers.php';
 
-$result = inputSendTasksIdTask($_GET['taskID']);
-if ($result['send_task_user_id'] != $_SESSION['user']['id']) {
+$result = inputTasksIdTask($_GET['taskID']);
+if ($result['created_task_user_id'] != $_SESSION['user']['id']) {
     http_response_code(403);
     die('Forbidden');
 }
