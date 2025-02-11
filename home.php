@@ -43,7 +43,6 @@ $status = $_GET['status'] ?? 'DESC';
                     <?php inputTasksTitleCurrentUser($status, 'send_task_user_id', $_SESSION['user']['id'] ?? null);?>
                 </ul>
             </form>
-
         </div>
 <script src="assets/app.js"></script>
 </body>
